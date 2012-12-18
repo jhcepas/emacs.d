@@ -1,15 +1,16 @@
-;; Add my personal directory to the path 
-(setq load-path (cons "~/.emacs.d/lib/" load-path))
-
 ;; Trick to get the filename of the installation directory
-(defconst epy-install-dir
+(defconst emacs-dir
   (file-name-directory (or load-file-name
                            (when (boundp 'bytecomp-filename) bytecomp-filename)
                            buffer-file-name))
   "Installation directory of emacs-for-python"
 )
-(add-to-list 'load-path epy-install-dir)
+(add-to-list 'load-path emacs-dir)
 
+;; Add my personal directory to the path 
+;(setq load-path (cons (concat emacs-dir "lib/") load-path))
+
+(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/"))
 
 (require 'jhc-edit)
 (require 'jhc-backups)

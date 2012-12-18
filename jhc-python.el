@@ -2,6 +2,8 @@
 (setq python-indet-offset 4)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq-default python-indent 4)
+
 (add-hook 'python-mode-hook '(lambda () 
      (define-key python-mode-map "\C-m" 'newline-and-indent)))
 
