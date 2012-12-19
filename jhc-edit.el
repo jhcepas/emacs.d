@@ -146,7 +146,8 @@ original" (interactive)
 ;;(global-linum-mode 1)
 
 ; enable cua mode, but do not touch my key-binds
-(cua-selection-mode t)
+;(cua-selection-mode t)
+(cua-mode t)
 
 (provide 'jhc-edit)
 

@@ -8,7 +8,7 @@
 (add-to-list 'load-path emacs-dir)
 
 ;; Add my personal directory to the path 
-;(setq load-path (cons (concat emacs-dir "lib/") load-path))
+(setq load-path (cons (concat emacs-dir "lib/") load-path))
 
 (setenv "PYTHONPATH" (concat emacs-dir "pythonlib/"))
 
