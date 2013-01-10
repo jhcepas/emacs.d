@@ -81,4 +81,11 @@
                                                  activate)
   (setq ad-return-value (nreverse ad-return-value)))
 
+(require 'sr-speedbar)
+(global-set-key (kbd "s-s") 'sr-speedbar-toggle)
+;(global-set-key (kbd "s-s") 'speedbar-get-focus)
+(setq speedbar-show-unknown-files t)
+(setq sr-speedbar-right-side t)
+
+
 (provide 'jhc-buffers)
