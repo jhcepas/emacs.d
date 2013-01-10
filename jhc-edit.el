@@ -102,7 +102,7 @@ original" (interactive)
       (progn
 	(setq bds (bounds-of-thing-at-point 'line))
 	(setq start (car bds) end (cdr bds))))
-  (python-indent-shift-left start end))
+  (python-shift-left start end))
   (setq deactivate-mark nil)
 )
 
@@ -115,7 +115,7 @@ original" (interactive)
       (progn
 	(setq bds (bounds-of-thing-at-point 'line))
 	(setq start (car bds) end (cdr bds))))
-  (python-indent-shift-right start end))
+  (python-shift-right start end))
   (setq deactivate-mark nil)
 )
 
@@ -146,7 +146,9 @@ original" (interactive)
 ;;(global-linum-mode 1)
 
 ; enable cua mode, but do not touch my key-binds
-(cua-selection-mode t)
+;(cua-selection-mode t)
+; enable full cua mode
+(cua-mode)
 
 (provide 'jhc-edit)
 
