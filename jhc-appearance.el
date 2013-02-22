@@ -86,5 +86,6 @@
 
 ;(require 'color-theme-zenburn)
 ;(color-theme-zenburn)
-
+(add-to-list 'custom-theme-load-path "~/.emacs.d/lib/color-theme-solarized/")
+;(load-theme 'solarized-dark t)
 (provide 'jhc-appearance)
