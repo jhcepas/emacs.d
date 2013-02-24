@@ -18,4 +18,10 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:setup-keys t)
 
+;; do not interfere with flyspell 
+(defcustom jedi:key-goto-definition (kbd "C-,")
+  "Keybind for command `jedi:goto-definition'."
+  :group 'jedi)
+
+
 (provide 'jhc-python)
