@@ -1,3 +1,21 @@
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap")
+
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t " my-keys" 'my-keys-minor-mode-map)
+
+(my-keys-minor-mode 1)
+
+(defmacro bind (key fn)
+  "shortcut for my-keys binding"
+  `(define-key my-keys-minor-mode-map
+     (kbd ,key)
+     ;; handle unquoted function names and lambdas
+     ,(if (listp fn)
+          fn 
+        `',fn)))
+
+
 ;; Perl based replace function
 (defun perl-replace (start end)
   "Replace a text pattern in a  region using perl expressions"
@@ -13,11 +31,6 @@
 
 ;; ibuffer by default
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;; Ido mode with fuzzy matching
-;; (require 'ido)
-;; (ido-mode t)
-;; (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 
 ;; add spaces around operators
 ;(require 'smart-operator)
@@ -145,10 +158,33 @@ original" (interactive)
 ;;(setq linum-format "%4d")
 ;;(global-linum-mode 1)
 
-; enable cua mode, but do not touch my key-binds
-;(cua-selection-mode t)
+; enable cua mode, but do not touch my key-bindings
+;(cua-selection-mode nil)
 ; enable full cua mode
-(cua-mode)
+(when window-system
+  (cua-mode))
+
+;;; start search at top of buffer
+(bind "C-S-s" (lambda () (interactive) (beginning-of-buffer) (isearch-forward)))
+
+(defun jsj-ac-show-help ()
+  "show docs for symbol at point or at beginning of list if not on a symbol"
+  (interactive)
+  (let ((s (save-excursion
+             (or (symbol-at-point)
+                 (progn (backward-up-list)
+                        (forward-char)
+                        (symbol-at-point))))))
+    (pos-tip-show (or (if (equal major-mode 'emacs-lisp-mode)
+                          (ac-symbol-documentation s)
+                        (ac-slime-documentation (symbol-name s))) "no docs")
+                  'popup-tip-face
+                  ;; 'alt-tooltip
+                  (point)
+                  nil
+                  -1)))
+
+(define-key lisp-mode-shared-map (kbd "C-c C-p") 'jsj-ac-show-help)
 
 (provide 'jhc-edit)
 
