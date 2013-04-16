@@ -186,5 +186,14 @@ original" (interactive)
 
 (define-key lisp-mode-shared-map (kbd "C-c C-p") 'jsj-ac-show-help)
 
+;;; a better auto-fill mode for programming
+(require 'fillcode)
+(add-hook 'c-mode-common-hook 'fillcode-mode)
+(add-hook 'perl-mode-hook 'fillcode-mode)
+(add-hook 'python-mode-hook 'fillcode-mode)
+(add-hook 'shell-script-mode-hook 'fillcode-mode)
+(add-hook 'sql-mode-hook 'fillcode-mode)
+(setq-default fill-column 80)
+
 (provide 'jhc-edit)
 
