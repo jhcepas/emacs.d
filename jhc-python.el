@@ -1,3 +1,16 @@
+
+(setq load-path (cons "~/.emacs.d/lib/python-mode" load-path))
+(require 'python-mode)
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (define-key python-mode-map (kbd "M-<right>")
+	      'py-shift-region-right)
+	    (define-key python-mode-map (kbd "M-<left>")
+	      'py-shift-region-left))
+	  )
+
+(require 'ipython)
+
 ; basics
 (setq python-indet-offset 4)
 (setq-default indent-tabs-mode nil)
@@ -57,6 +70,5 @@ invoked from a Python process, it will switch back to the `python-mode' buffer."
  
 ;(define-key inferior-python-mode-map (kbd "<f12>") 'toggle-between-python-buffers)
 ;(define-key python-mode-map (kbd "<f12>") 'toggle-between-python-buffers)
-
 
 (provide 'jhc-python)

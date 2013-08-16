@@ -6,10 +6,8 @@
   "Installation directory of emacs-for-python"
 )
 (add-to-list 'load-path emacs-dir)
-
 ;; Add my personal directory to the path 
 (setq load-path (cons (concat emacs-dir "lib/") load-path))
-
 (setenv "PYTHONPATH" (concat emacs-dir "pythonlib/"))
 
 (require 'jhc-edit)
@@ -24,13 +22,23 @@
 
 ;(require 'template)
 ;(template-initialize)
-
 ;(require 'pdb)
+
+(require 'php-mode)
+(require 'web-mode)
+;(require 'multi-web-mode)
+;(setq mweb-default-major-mode 'html-mode)
+;(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+;                  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+;                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+;(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+;(multi-web-global-mode 1)
+
 
 (setq auto-mode-alist
       (append '(
                 ("\\.css\\'"                           . css-mode)
-                ("\\.\\(htm\\|html\\|xhtml\\)$"        . html-mode)
+                ("\\.\\(htm\\|html\\|xhtml\\)$"        . web-mode)
                 ("\\.sql$"                             . sql-mode)
                 ("\\.js$"                              . js-mode)
                 ("\\.json$"                            . js-mode)
@@ -152,3 +160,5 @@
  '(visible-bell t)
  '(x-select-enable-clipboard t)
  '(x-stretch-cursor nil))
+
+

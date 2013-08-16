@@ -92,6 +92,8 @@ original" (interactive)
         (forward-line -1))
       (move-to-column column t)))))
 
+; patches by balle
+; http://www.datenterrorist.de
 (defun move-text-down (arg)
   "Move region (transient-mark-mode active) or current line
   arg lines down."
@@ -104,45 +106,8 @@ original" (interactive)
   (interactive "*p")
   (move-text-internal (- arg)))
 
-; patches by balle
-; http://www.datenterrorist.de
-(defun balle-python-shift-left ()
-  (interactive)
-  (let (start end bds)
-    (if (and transient-mark-mode
-	   mark-active)
-	(setq start (region-beginning) end (region-end))
-      (progn
-	(setq bds (bounds-of-thing-at-point 'line))
-	(setq start (car bds) end (cdr bds))))
-  (python-shift-left start end))
-  (setq deactivate-mark nil)
-)
-
-(defun balle-python-shift-right ()
-  (interactive)
-  (let (start end bds)
-    (if (and transient-mark-mode
-	   mark-active)
-	(setq start (region-beginning) end (region-end))
-      (progn
-	(setq bds (bounds-of-thing-at-point 'line))
-	(setq start (car bds) end (cdr bds))))
-  (python-shift-right start end))
-  (setq deactivate-mark nil)
-)
-
 (global-set-key (kbd "M-<up>") 'move-text-up)
 (global-set-key (kbd "M-<down>") 'move-text-down)
-
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (define-key python-mode-map (kbd "M-<right>")
-	      'balle-python-shift-right)
-	    (define-key python-mode-map (kbd "M-<left>")
-	      'balle-python-shift-left))
-	  )
-
 
 ; delete seleted text when typing
 (delete-selection-mode 1)
