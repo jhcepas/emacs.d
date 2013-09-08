@@ -11,6 +11,7 @@
 (setq load-path (cons (concat emacs-dir "lib/") load-path))
 
 (setenv "PYTHONPATH" (concat emacs-dir "pythonlib/"))
+(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/jedigit/"))
 
 (require 'jhc-edit)
 (require 'jhc-backups)
