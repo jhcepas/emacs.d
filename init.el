@@ -10,8 +10,7 @@
 ;; Add my personal directory to the path 
 (setq load-path (cons (concat emacs-dir "lib/") load-path))
 
-(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/"))
-(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/jedigit/"))
+(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/:" emacs-dir "pythonlib/jedigit"))
 
 (require 'jhc-edit)
 (require 'jhc-backups)
@@ -120,7 +119,7 @@
  '(link ((t (:foreground "cyan" :underline t))))
  '(minibuffer-prompt ((t (:foreground "cyan"))))
  '(outline-2 ((t (:foreground "steelblue1"))) t)
- '(popup-tip-face ((t (:inherit popup-face :height 0.7))))
+ '(popup-tip-face ((t (:inherit popup-face))))
  '(region ((t (:background "grey20"))))
  '(rst-level-1-face ((t (:background "darkred"))) t)
  '(rst-level-2-face ((t (:background "darkgreen"))) t)
