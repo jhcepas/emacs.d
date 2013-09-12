@@ -6,9 +6,11 @@
   "Installation directory of emacs-for-python"
 )
 (add-to-list 'load-path emacs-dir)
+
 ;; Add my personal directory to the path 
 (setq load-path (cons (concat emacs-dir "lib/") load-path))
-(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/"))
+
+(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/:" emacs-dir "pythonlib/jedigit"))
 
 (require 'jhc-edit)
 (require 'jhc-backups)
@@ -22,6 +24,7 @@
 
 ;(require 'template)
 ;(template-initialize)
+
 ;(require 'pdb)
 
 (require 'php-mode)
@@ -71,10 +74,10 @@
 (setq tramp-default-method "scp")
 (setq tramp-default-user "jhuerta")
 (setq tramp-auto-save-directory "/tmp/")
-
 ;; "turn off" the effect of `backup-directory-alist' for TRAMP files
 (add-to-list 'backup-directory-alist
              (cons tramp-file-name-regexp nil))
+
 
 ;;get rid of the “yes or no” prompt and replace it with “y or n”:
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -97,8 +100,9 @@
 (setq ido-everywhere t)
 ;(setq ido-file-extensions-order '(".py", ".txt"))
 
-
 ;; CUSTOM COLORS & STYLE
+
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -127,7 +131,7 @@
  '(link ((t (:foreground "cyan" :underline t))))
  '(minibuffer-prompt ((t (:foreground "cyan"))))
  '(outline-2 ((t (:foreground "steelblue1"))) t)
- '(popup-tip-face ((t (:inherit popup-face :height 0.7))))
+ '(popup-tip-face ((t (:inherit popup-face))))
  '(region ((t (:background "grey20"))))
  '(rst-level-1-face ((t (:background "darkred"))) t)
  '(rst-level-2-face ((t (:background "darkgreen"))) t)
@@ -162,3 +166,13 @@
  '(x-stretch-cursor nil))
 
 
+;(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+; 
+;(unless (require 'el-get nil 'noerror)
+;  (with-current-buffer
+;      (url-retrieve-synchronously
+;       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+;    (goto-char (point-max))
+;    (eval-print-last-sexp)))
+; 
+;(el-get 'sync)

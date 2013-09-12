@@ -6,8 +6,8 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-;; Do What I Mean mode
-(setq ac-dwim t)
+
+(setq ac-dwim nil)
 (ac-config-default)
 
 ;; set also the completion for eshell
@@ -16,6 +16,9 @@
 ;(define-key ac-complete-mode-map "\r" 'ac-complete)
 (define-key ac-complete-mode-map "\M-n" 'ac-next)
 (define-key ac-complete-mode-map "\M-p" 'ac-previous)
+
+(setq ac-auto-start t)
+;;(define-key ac-mode-map "\S-TAB" 'auto-complete)
 
 ;; custom keybindings to use tab, enter and up and down arrows
 (setq ac-use-menu-map t)
@@ -30,7 +33,8 @@
 ;; I prefer to have instant suggestions
 (setq ac-auto-show-menu t)
 (setq ac-use-quick-help t)
-(setq ac-quick-help-delay 0.4)
+(setq ac-quick-help-delay 1)
+(setq ac-delay 0.3)
 
 ;; Smaller menu
 (setq ac-menu-height 5)
