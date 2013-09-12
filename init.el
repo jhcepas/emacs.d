@@ -73,11 +73,6 @@
 ;; ;;;;;;;;;;;; TRAMP
 (setq tramp-default-method "scp")
 (setq tramp-default-user "jhuerta")
-(setq tramp-auto-save-directory "/tmp/")
-;; "turn off" the effect of `backup-directory-alist' for TRAMP files
-(add-to-list 'backup-directory-alist
-             (cons tramp-file-name-regexp nil))
-
 
 ;;get rid of the “yes or no” prompt and replace it with “y or n”:
 (fset 'yes-or-no-p 'y-or-n-p)

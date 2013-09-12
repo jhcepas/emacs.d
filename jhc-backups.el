@@ -13,4 +13,13 @@
     version-control t        ; use versioned backups
 )
 
+; backup tramp files
+(setq tramp-auto-save-directory "~/.emacs-backups")
+(setq tramp-backup-directory-alist backup-directory-alist)
+
+;; "turn off" the effect of `backup-directory-alist' for TRAMP files
+;(add-to-list 'backup-directory-alist
+;             (cons tramp-file-name-regexp nil))
+
+
 (provide 'jhc-backups)
