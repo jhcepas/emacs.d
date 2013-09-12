@@ -26,6 +26,7 @@
 
 (require 'php-mode)
 (require 'web-mode)
+
 ;(require 'multi-web-mode)
 ;(setq mweb-default-major-mode 'html-mode)
 ;(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
@@ -64,16 +65,16 @@
 
 
 ; My references database
-(setq reftex-default-bibliography   (quote       ("~/refs.bib")))       
+(setq reftex-default-bibliography (quote ("~/refs.bib")))       
 
 ;; ;;;;;;;;;;;; TRAMP
 (setq tramp-default-method "scp")
 (setq tramp-default-user "jhuerta")
 (setq tramp-auto-save-directory "/tmp/")
+
 ;; "turn off" the effect of `backup-directory-alist' for TRAMP files
 (add-to-list 'backup-directory-alist
              (cons tramp-file-name-regexp nil))
-
 
 ;;get rid of the “yes or no” prompt and replace it with “y or n”:
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -96,9 +97,8 @@
 (setq ido-everywhere t)
 ;(setq ido-file-extensions-order '(".py", ".txt"))
 
+
 ;; CUSTOM COLORS & STYLE
-
-
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.

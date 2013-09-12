@@ -1,15 +1,15 @@
 
-(setq load-path (cons "~/.emacs.d/lib/python-mode" load-path))
-(require 'python-mode)
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (define-key python-mode-map (kbd "M-<right>")
-	      'py-shift-region-right)
-	    (define-key python-mode-map (kbd "M-<left>")
-	      'py-shift-region-left))
-	  )
-
-(require 'ipython)
+;(setq load-path (cons "~/.emacs.d/lib/python-mode" load-path))
+;(require 'python-mode)
+;(add-hook 'python-mode-hook
+;      (lambda ()
+;        (define-key python-mode-map (kbd "M-<right>")
+;          'py-shift-region-right)
+;        (define-key python-mode-map (kbd "M-<left>")
+;          'py-shift-region-left))
+;      )
+; 
+;(require 'ipython)
 
 ; basics
 (setq python-indet-offset 4)
