@@ -624,6 +624,10 @@ leaves point at the first non-whitespace character on the new line."
     (skip-chars-backward " \t")         ; don't leave trailing whitespace
     (fillcode-fill-here)))
 
+(defsubst python-in-string/comment ()
+  "Return non-nil if point is in a Python literal (a comment or string)."
+  ;; We don't need to save the match data.
+  (nth 8 (syntax-ppss)))
 
 (defun fillcode-in-literal ()
   "Return non-nil if inside a comment or string literal, nil otherwise.

@@ -27,7 +27,7 @@
 
 ;(require 'pdb)
 
-(require 'php-mode)
+;(require 'php-mode)
 (require 'web-mode)
 
 ;(require 'multi-web-mode)
@@ -38,6 +38,8 @@
 ;(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 ;(multi-web-global-mode 1)
 
+;;I dont want visible alarms 
+(setq ring-bell-function 'ignore)
 
 (setq auto-mode-alist
       (append '(
@@ -72,7 +74,7 @@
 
 ;; ;;;;;;;;;;;; TRAMP
 (setq tramp-default-method "scp")
-(setq tramp-default-user "jhuerta")
+(setq tramp-default-user "huerta")
 
 ;;get rid of the “yes or no” prompt and replace it with “y or n”:
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -103,12 +105,12 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "grey10" :foreground "grey85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
+ '(default ((t (:stipple nil :background "grey10" :foreground "grey85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal))))
  '(ac-candidate-face ((t (:background "lightgrey" :foreground "black"))))
  '(ac-completion-face ((t (:foreground "dimgray" :underline t))))
  '(ac-gtags-selection-face ((t (:background "steelblue" :foreground "white"))))
- '(flymake-errline ((((class color)) (:underline "dark red" :slant italic))) t)
- '(flymake-warnline ((((class color)) (:underline "grey52"))) t)
+ '(flymake-errline ((((class color)) (:underline "dark red" :slant italic))))
+ '(flymake-warnline ((((class color)) (:underline "grey52"))))
  '(flyspell-duplicate ((t (:underline t :slant italic))))
  '(flyspell-incorrect ((t (:underline t :weight bold))))
  '(font-lock-builtin-face ((t (:foreground "cornflower blue"))))
@@ -125,11 +127,11 @@
  '(lazy-highlight ((t (:background "goldenrod" :foreground "black"))))
  '(link ((t (:foreground "cyan" :underline t))))
  '(minibuffer-prompt ((t (:foreground "cyan"))))
- '(outline-2 ((t (:foreground "steelblue1"))) t)
+ '(outline-2 ((t (:foreground "steelblue1"))))
  '(popup-tip-face ((t (:inherit popup-face))))
  '(region ((t (:background "grey20"))))
- '(rst-level-1-face ((t (:background "darkred"))) t)
- '(rst-level-2-face ((t (:background "darkgreen"))) t)
+ '(rst-level-1-face ((t nil)) t)
+ '(rst-level-2-face ((t nil)) t)
  '(rst-level-3-face ((t (:background "darkblue"))) t)
  '(rst-level-4-face ((t (:background "grey20"))) t)
  '(show-paren-match ((t (:background "grey20" :foreground "yellow"))))

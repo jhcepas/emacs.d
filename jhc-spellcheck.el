@@ -3,10 +3,22 @@
 ;;               (if (file-executable-p "/usr/bin/hunspell")
 ;;                   "/usr/bin/hunspell"
 ;;                 "/usr/bin/aspell"))
-(setq-default ispell-program-name "/usr/bin/aspell")
+;(setq-default ispell-program-name "/opt/local/bin/aspell") ;; OSX macports install
+
+(defmacro WhenOSX (&rest body)
+   `(if (eq system-type 'darwin)
+        (progn ,@body)
+       nil
+     )
+ )
+(WhenOSX
+ (setq ispell-program-name "/opt/local/bin/aspell")
+ )
+
+
 
 ;; Default dict is british english
-(ispell-change-dictionary "british")
+(ispell-change-dictionary "english")
 
 ;; ask to search dictionary
 (global-set-key (kbd "<f7>") 'switch-to-spanish-and-check)
