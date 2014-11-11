@@ -160,5 +160,8 @@ original" (interactive)
 (add-hook 'sql-mode-hook 'fillcode-mode)
 (setq-default fill-column 80)
 
+; autocomplete pairs
+(electric-pair-mode 1)
+
 (provide 'jhc-edit)
 

@@ -49,6 +49,9 @@
 (add-hook 'nxml-mode-hook       'flyspell-prog-mode)
 (add-hook 'python-mode-hook     'flyspell-prog-mode)
 (add-hook 'sh-mode-hook         'flyspell-prog-mode)
+(add-hook 'web-mode             'flyspell-prog-mode)
+(add-hook 'html-mode            'flyspell-prog-mode)
+(add-hook 'js2-modee            'flyspell-prog-mode)
 
 ;; set on the fly spell checking 
 (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checking" t)

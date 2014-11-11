@@ -5,12 +5,19 @@
                            buffer-file-name))
   "Installation directory of emacs-for-python"
 )
-(add-to-list 'load-path emacs-dir)
+;;(add-to-list 'load-path emacs-dir)
 
 ;; Add my personal directory to the path 
 (setq load-path (cons (concat emacs-dir "lib/") load-path))
 
 (setenv "PYTHONPATH" (concat emacs-dir "pythonlib/:" emacs-dir "pythonlib/jedigit"))
+
+;; enable melpa repo if possible
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
 
 (require 'jhc-edit)
 (require 'jhc-backups)
@@ -29,7 +36,7 @@
 
 ;(require 'php-mode)
 (require 'web-mode)
-
+(require 'wooky)
 ;(require 'multi-web-mode)
 ;(setq mweb-default-major-mode 'html-mode)
 ;(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
@@ -43,12 +50,11 @@
 
 (setq auto-mode-alist
       (append '(
-                ("\\.css\\'"                           . css-mode)
-                ("\\.\\(htm\\|html\\|xhtml\\)$"        . web-mode)
+                ("\\.css\\'"                           . web-mode)
+                ("\\.\\(htm\\|html\\|xhtml\\|php\\)$"  . web-mode)
                 ("\\.sql$"                             . sql-mode)
-                ("\\.js$"                              . js-mode)
-                ("\\.json$"                            . js-mode)
-                ("\\.js$"                              . js-mode)
+                ("\\.js$"                              . js2-mode)
+                ("\\.json$"                            . js2-mode)
                 ("\\.py"                               . python-mode)
                 ;; sorted by chapter
                 ("\\.\\(diffs?\\|patch\\|rej\\)\\'"    . diff-mode)
@@ -58,9 +64,10 @@
                 ("\\.log$"                             . text-mode)
                 ("\\.tex$"                             . LaTeX-mode)
                 ("\\.tpl$"                             . LaTeX-mode)
-                ("\\.cgi$"                             . perl-mode)
+                ("\\.cgi$"                             . web-mode)
                 ("[mM]akefile"                         . makefile-mode)
                 ("\\.bash$"                            . shell-script-mode)
+                ("\\.sh$"                              . shell-script-mode)
                 ("\\.expect$"                          . tcl-mode)
 
                 (".ssh/config\\'"                      . ssh-config-mode)
@@ -73,7 +80,7 @@
 (setq reftex-default-bibliography (quote ("~/refs.bib")))       
 
 ;; ;;;;;;;;;;;; TRAMP
-(setq tramp-default-method "scp")
+(setq tramp-default-method "ssh")
 (setq tramp-default-user "huerta")
 
 ;;get rid of the “yes or no” prompt and replace it with “y or n”:
@@ -98,8 +105,6 @@
 ;(setq ido-file-extensions-order '(".py", ".txt"))
 
 ;; CUSTOM COLORS & STYLE
-
-
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,13 +168,3 @@
  '(x-stretch-cursor nil))
 
 
-;(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-; 
-;(unless (require 'el-get nil 'noerror)
-;  (with-current-buffer
-;      (url-retrieve-synchronously
-;       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-;    (goto-char (point-max))
-;    (eval-print-last-sexp)))
-; 
-;(el-get 'sync)
