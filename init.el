@@ -36,7 +36,7 @@
 
 ;(require 'php-mode)
 (require 'web-mode)
-(require 'wooky)
+;(require 'wooky)
 ;(require 'multi-web-mode)
 ;(setq mweb-default-major-mode 'html-mode)
 ;(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
