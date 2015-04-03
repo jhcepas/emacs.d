@@ -10,13 +10,13 @@
 ;; Add my personal directory to the path 
 (setq load-path (cons (concat emacs-dir "lib/") load-path))
 
-(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/:" emacs-dir "pythonlib/jedigit"))
+;(setenv "PYTHONPATH" (concat emacs-dir "pythonlib/:" emacs-dir "pythonlib/jedigit/:" emacs-dir "lib/jedi/jedi"))
 
-;; enable melpa repo if possible
+; packages
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
   )
 
 (require 'jhc-edit)

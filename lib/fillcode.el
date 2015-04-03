@@ -1,9 +1,10 @@
-;;; fillcode.el --- Fillcode minor mode
+;;; fillcode.el --- Fill (wrap) function calls and expressions in source code
 ;;
-;; Fillcode
-;; http://snarfed.org/fillcode
-;; Ryan Barrett <fillcode@ryanb.org>
+;; Version: 1.0
+;; Author: Ryan Barrett <fillcode@ryanb.org>
+;; URL: http://snarfed.org/fillcode
 ;;
+;; Commentary:
 ;; This minor mode enhances the fill functions when in source code major modes,
 ;; such as c-mode, java-mode, and python-mode. Specifically, it provides a new
 ;; fill function that intelligently fills some parts of source code, like
@@ -15,6 +16,9 @@
 ;; This code is in the public domain.
 ;;
 ;; Changelog:
+;; 1.0 2014/11/15:
+;; - compatibility update for emacs 24.4's python mode
+;; - publish package to MELPA
 ;; 0.9 2012/4/24:
 ;; - minor fix to allow byte compiling. no functional changes. (thanks Jonathan
 ;;   Tomer!)
@@ -25,9 +29,7 @@
 ;; 0.7.1 2007/08/24 (and before):
 ;; TODO
 
-(defconst fillcode-version "0.9")
-
-(require 'cl)  ; for the case macro
+(defconst fillcode-version "1.0")
 
 (require 'cc-bytecomp)  ; for c-in-literal and c-literal-limits
 (require 'cc-engine)
@@ -390,7 +392,7 @@ one. Otherwise, for safety, just uses the beginning of the line.
 
 Note that this function moves point!"
   ; step 1: find the beginning of the statement
-  (case major-mode
+  (cl-case major-mode
     ((c-mode c++-mode java-mode objc-mode perl-mode)
      ; if we're at the beginning of the statement, `c-beginning-of-statement'
      ; will go to the *previous* statement. so, first move past a
@@ -405,7 +407,9 @@ Note that this function moves point!"
      (save-excursion
        (if (functionp 'py-goto-statement-at-or-above)
            (py-goto-statement-at-or-above)
-         (python-beginning-of-statement))))
+         (if (functionp 'python-beginning-of-statement)
+             (python-beginning-of-statement)
+           (python-nav-beginning-of-statement)))))
 
     ; `c-beginning-of-statement' could be a good fallback for unknown
     ; languages, but it occasionally fails badly, e.g. in `perl-mode'.
@@ -427,7 +431,7 @@ for safety, just uses the end of the line."
     (if (equal ?{ (char-before))
         (backward-char))
 
-    (case major-mode
+    (cl-case major-mode
       ((c-mode c++-mode java-mode objc-mode perl-mode)
        ; c-end-of-statement mostly does the right thing with if conditions, for
        ; statements, {...} blocks, and statements that end with semicolon.
@@ -435,12 +439,15 @@ for safety, just uses the end of the line."
 
       ((python-mode)
          (let ((start (point)))
-           (if (if (functionp 'py-goto-statement-below)
-                   (py-goto-statement-below)
-                 (python-next-statement))
-               (search-backward ")" start 'p)
+           (if (functionp 'python-nav-end-of-statement)
+               (python-nav-end-of-statement)
+             (if (functionp 'py-goto-statement-below)
+                 (py-goto-statement-below)
+               (if (functionp 'python-next-statement)
+                   (python-next-statement)))
+             (search-backward ")" start 'p)
              (condition-case nil (forward-char) (error nil))))))
-  
+
       ; `c-end-of-statement' might be a good fallback for unknown languages,
       ; but it occasionally fails badly, e.g. in `perl-mode'.
     (point-at-eol)))
@@ -624,10 +631,6 @@ leaves point at the first non-whitespace character on the new line."
     (skip-chars-backward " \t")         ; don't leave trailing whitespace
     (fillcode-fill-here)))
 
-(defsubst python-in-string/comment ()
-  "Return non-nil if point is in a Python literal (a comment or string)."
-  ;; We don't need to save the match data.
-  (nth 8 (syntax-ppss)))
 
 (defun fillcode-in-literal ()
   "Return non-nil if inside a comment or string literal, nil otherwise.
@@ -641,9 +644,13 @@ literal, so they return nil if point is on the start token. We want them to
 return non-nil if we're past the first char of the start token, so
 `fillcode-in-literal' returns non-nil instead."
   (let ((in-literal-fn
-         (case major-mode
-           ((python-mode) (if (functionp 'py-in-literal)
-                              'py-in-literal 'python-in-string/comment))
+         (cl-case major-mode
+           ((python-mode)
+            (if (functionp 'py-in-literal) 'py-in-literal
+              (if (functionp 'python-in-string/comment) 'python-in-string/comment
+                (if (functionp 'python-syntax-comment-or-string-p)
+                    'python-syntax-comment-or-string-p
+                  t))))
            (otherwise 'c-in-literal))))
 
     ; if the major mode says point *or* the char *after* point is in a literal,
@@ -661,7 +668,7 @@ return non-nil if we're past the first char of the start token, so
 (defun fillcode-get-mode-indent-offset ()
   "Returns the indent offset, ie the number of columns to indent, in the
 current mode."
-  (case major-mode
+  (cl-case major-mode
     ((python-mode) py-indent-offset)
     (otherwise c-basic-offset)))
 
