@@ -137,9 +137,9 @@
  '(outline-2 ((t (:foreground "steelblue1"))))
  '(popup-tip-face ((t (:inherit popup-face))))
  '(region ((t (:background "grey20"))))
- '(rst-level-1-face ((t nil)) t)
- '(rst-level-2-face ((t nil)) t)
- '(rst-level-3-face ((t (:background "darkblue"))) t)
+ '(rst-level-1-face ((t (:background "darkslategrey"))) t)
+ '(rst-level-2-face ((t (:background "slategrey"))) t)
+ '(rst-level-3-face ((t (:background "lightslategrey"))) t)
  '(rst-level-4-face ((t (:background "grey20"))) t)
  '(show-paren-match ((t (:background "grey20" :foreground "yellow"))))
  '(tooltip ((((class color)) (:inherit variable-pitch :background "lightyellow" :foreground "black" :height 0.8))))
@@ -170,3 +170,8 @@
  '(x-stretch-cursor nil))
 
 
+
+ '(rst-level-1-face ((t (:background "darkslategrey"))) t)
+ '(rst-level-2-face ((t (:background "slategrey"))) t)
+ '(rst-level-3-face ((t (:background "lightslategrey"))) t)
+ '(rst-level-4-face ((t (:background "grey20"))) t)
